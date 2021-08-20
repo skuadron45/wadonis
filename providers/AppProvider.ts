@@ -1,22 +1,24 @@
 import { ApplicationContract } from '@ioc:Adonis/Core/Application'
 
 export default class AppProvider {
-  constructor (protected app: ApplicationContract) {
+
+  protected app: ApplicationContract;
+
+  constructor(app: ApplicationContract) {
+    this.app = app;
   }
 
-  public register () {
+  public register() {
     // Register your own bindings
   }
 
-  public async boot () {
-    // IoC container is ready
+  public async boot() {
   }
 
-  public async ready () {
-    // App is ready
+  public async ready() {
   }
 
-  public async shutdown () {
+  public async shutdown() {
     // Cleanup, since app is going down
   }
 }
