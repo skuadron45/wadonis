@@ -3,9 +3,37 @@
 @section('page-content')
 <h1 class="mt-4">Scan QR</h1>
 
-<p>{{device.name}}</p>
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <div class="row justify-content-center">
+                    <div class="col-4 text-center">
 
-<img id="qr-image" alt="Qrcode"></img>
+                        <div class="row mb-2">
+                            <div class="col">
+                                <div class="qr-wrapper">
+                                    <span id="qr-spinner">
+                                        <span><i class="fa fa-spinner fa-spin"></i></span>
+                                    </span>                                    
+                                    <canvas id="qr-image"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <button id="btn-refresh-qr" class="btn btn-sm btn-primary">Refresh</button>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@endsection
+
+@section('page-style')
+@entryPointStyles('deviceqr')
 @endsection
 
 @section('page-script')

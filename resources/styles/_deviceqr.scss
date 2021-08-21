@@ -1,0 +1,25 @@
+.qr-wrapper {
+  position: relative;
+  background-color: white;
+
+  #qr-image {
+    width: 300px;
+    height: 300px;
+  }
+  #qr-spinner {
+    background-color: inherit;
+    position: absolute;
+    display: table;
+    height: 100%;
+    width: 100%;    
+
+    span {
+      display: table-cell;
+      vertical-align: middle;
+
+      .fa-spin {
+        font-size: 48px;
+      }
+    }
+  }
+}

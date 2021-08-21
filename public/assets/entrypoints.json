@@ -9,6 +9,9 @@
       ]
     },
     "deviceqr": {
+      "css": [
+        "http://localhost:8080/assets/deviceqr.css"
+      ],
       "js": [
         "http://localhost:8080/assets/deviceqr.js"
       ]
