@@ -1,23 +1,31 @@
+import Application from '@ioc:Adonis/Core/Application'
 import { WebsocketService } from "@ioc:App/WebsocketService";
 
-import { Server } from 'socket.io'
+import { Server as SocketServer } from 'socket.io'
 
 class BaseWebsocketService implements WebsocketService {
 
-    private io: Server
+    private booted = false;
+    private io: SocketServer
 
-    public boot(server: any) {
-        this.io = new Server(server)
+    public async boot() {
+        if (this.booted) {
+            console.log("socket server already booted!");
+            return;
+        }
+
+        let Server = Application.container.make("Adonis/Core/Server");
+
+        this.io = new SocketServer(Server.instance!);
         this.io.on("connection", (socket) => {
 
             socket.on("request-qr", (callback: (socketId: string) => void) => {
                 callback(socket.id)
             });
-        });
-    }
 
-    public emit(event: string, ...args: any[]) {
-        this.io.emit(event, ...args);
+        });
+        this.booted = true;
+        console.log("socket server booted!");
     }
 
 }

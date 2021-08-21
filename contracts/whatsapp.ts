@@ -5,15 +5,14 @@
  * file.
  */
 
-declare module '@ioc:App/WebsocketService' {
+declare module '@ioc:App/WhatsappServer' {
 
-  export interface WebsocketService {
+  export interface WhatsappServer {
 
     boot(): Promise<void>;
+    test(): Promise<void>;
 
   }
-
-  const instance: WebsocketService;
+  const instance: WhatsappServer;
   export default instance
-
 }

@@ -1,5 +1,8 @@
 import { WAConnection } from '@adiwajshing/baileys';
 
+import Application from '@ioc:Adonis/Core/Application'
+import { WhatsappServer } from "@ioc:App/WhatsappServer";
+
 class WaManager {
 
     public conn = new WAConnection();
@@ -24,7 +27,19 @@ class WaManager {
     }
 }
 
-let manager = new WaManager();
-manager.initConnection();
+class BaseWhatsappServer implements WhatsappServer {
 
-export default manager;
+    public async boot() {
+        let Database = Application.container.make("Adonis/Lucid/Database");
+
+        console.log("whatsapp server booted");
+        let devices = await Database.query()
+            .from('devices')
+            .select('*');
+    }
+
+    public async test() {
+
+    }
+}
+export default BaseWhatsappServer;

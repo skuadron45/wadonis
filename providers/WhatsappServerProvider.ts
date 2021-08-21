@@ -1,5 +1,6 @@
 import { ApplicationContract } from '@ioc:Adonis/Core/Application'
-import BaseWebsocketService from 'App/Services/BaseWebSocketService'
+import BaseWhatsappServer from 'App/Services/BaseWhatsappServer'
+
 /*
 |--------------------------------------------------------------------------
 | Provider
@@ -19,12 +20,12 @@ import BaseWebsocketService from 'App/Services/BaseWebSocketService'
 | }
 |
 */
-export default class WebSocketProvider {
+export default class WhatsappServerProvider {
   constructor(protected app: ApplicationContract) {
   }
 
   public register() {
-    this.app.container.singleton('App/WebsocketService', () => new BaseWebsocketService())
+    this.app.container.singleton('App/WhatsappServer', () => new BaseWhatsappServer())
   }
 
   public async boot() {
@@ -33,10 +34,9 @@ export default class WebSocketProvider {
 
   public async ready() {
     if (this.app.environment === 'web') {
-      let WebsocketService = this.app.container.make("App/WebsocketService");
-      WebsocketService.boot();
+      let WhatsappServer = this.app.container.make("App/WhatsappServer");
+      WhatsappServer.boot();
     }
-
   }
 
   public async shutdown() {
