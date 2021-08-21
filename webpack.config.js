@@ -46,6 +46,7 @@ Encore.setPublicPath('/assets')
 |
 */
 Encore.addEntry('app', './resources/js/app.js')
+Encore.addEntry('deviceqr', './resources/js/deviceqr.js')
 
 /*
 |--------------------------------------------------------------------------
@@ -176,7 +177,7 @@ Encore.enableSassLoader()
 |
 */
 Encore.enablePostCssLoader()
-Encore.configureCssLoader(() => {})
+Encore.configureCssLoader(() => { })
 
 /*
 |--------------------------------------------------------------------------
@@ -192,6 +193,14 @@ Encore.configureCssLoader(() => {})
 //   runtimeCompilerBuild: false,
 //   useJsx: false
 // })
+
+// const webpack = require('webpack')
+// Encore.addPlugin(new webpack.ProvidePlugin({
+//   $: 'jquery',
+//   jQuery: 'jquery',
+//   QRCode: 'qrcode',
+//   io: 'socket.io-client'
+// }))
 
 /*
 |--------------------------------------------------------------------------

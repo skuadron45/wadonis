@@ -33,6 +33,7 @@ Route.get('dashboard', "DashboardController.index").as("dashboard.index")
 Route.group(() => {
     Route.get('/', "DeviceController.index").as("device.index")
     Route.get('create', "DeviceController.create").as("device.create")
+    Route.get('qrcode/:id', "DeviceController.qrcode").as("device.qrcode")    
 
 }).prefix('device')
 

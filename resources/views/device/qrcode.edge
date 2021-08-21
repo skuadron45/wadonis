@@ -1,0 +1,13 @@
+@layout('layouts/main')
+
+@section('page-content')
+<h1 class="mt-4">Scan QR</h1>
+
+<p>{{device.name}}</p>
+
+<img id="qr-image" alt="Qrcode"></img>
+@endsection
+
+@section('page-script')
+@entryPointScripts('deviceqr')
+@endsection
