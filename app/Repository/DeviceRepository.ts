@@ -5,4 +5,6 @@ export interface DeviceRepository {
 
     findAll(): Promise<Device[]>
 
+    findById(id: any): Promise<Device>
+
 }

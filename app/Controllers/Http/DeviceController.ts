@@ -1,19 +1,19 @@
+import DeviceRepository from '@ioc:App/Repository/DeviceRepository';
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
-import Database from '@ioc:Adonis/Lucid/Database';
 
 export default class DeviceController {
 
     public async index({ view }: HttpContextContract) {
 
-        let devices = await Database.query()
-            .from('devices')
-            .select('*');
+        let devices = await DeviceRepository.findAll();
 
         let data: any = {};
-
         data.devices = devices.map((device, index) => {
-            device.index = index + 1;
-            return device
+
+            let deviceCustom = device.data;
+            deviceCustom.index = index + 1;
+
+            return deviceCustom
         });
         return view.render("device/index", data);
     }
@@ -26,12 +26,10 @@ export default class DeviceController {
     public async qrcode({ view, params }: HttpContextContract) {
 
         let id = params.id
-        let device = await Database.query()
-            .from('devices')
-            .select('*').where({ id: id }).first();
+        let device = await DeviceRepository.findById(id);
 
         let data: any = {
-            device: device
+            device: device.data
         };
         return view.render("device/qrcode", data);
     }
