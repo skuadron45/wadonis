@@ -21,17 +21,25 @@ function generateQr(qrText) {
     })
 }
 
-socket.on('qr-refreshed', (qrText) => {
+socket.on('session-changed', () => {
+    window.location.reload();
+});
+
+socket.on('qr-refreshed', (responseQr) => {
+    console.log("qr-refreshed", responseQr);
+
     $('#qr-spinner').show();
-    generateQr(qrText);
-    $('#qr-spinner').hide();
+    if (responseQr.success) {
+        generateQr(responseQr.qrText);
+        $('#qr-spinner').hide();
+    }
 });
 
 function requestQr() {
-    socket.emit("request-qr", deviceId, (response) => {
-        console.log(response);
-        if (response.success) {
-            generateQr(response.qrText);
+    socket.emit("request-qr", deviceId, (responseQr) => {
+        console.log("request-qr", responseQr);
+        if (responseQr.success) {
+            generateQr(responseQr.qrText);
             $('#qr-spinner').hide();
         }
     });

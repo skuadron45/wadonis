@@ -10,8 +10,11 @@ export default class DeviceController {
         let data: any = {};
         data.devices = devices.map((device, index) => {
 
+            let data = device.data;
+
             let deviceCustom = device.data;
             deviceCustom.index = index + 1;
+            deviceCustom.status = data.session ? "Tersambung" : "Belum tersambung";
 
             return deviceCustom
         });
@@ -23,10 +26,14 @@ export default class DeviceController {
         return view.render("device/create", data);
     }
 
-    public async qrcode({ view, params }: HttpContextContract) {
+    public async qrcode({ view, params, response }: HttpContextContract) {
 
         let id = params.id
         let device = await DeviceRepository.findById(id);
+
+        if (device.session) {
+            response.redirect().toRoute('device.index');
+        }
 
         let data: any = {
             device: device.data

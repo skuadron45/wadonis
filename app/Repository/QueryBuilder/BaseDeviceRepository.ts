@@ -4,6 +4,14 @@ import { Device } from 'App/Repository/Device';
 
 class BaseDeviceRepository implements DeviceRepository {
 
+    public async updateSession(id: any, session: string): Promise<void> {
+        let Database = Application.container.resolveBinding("Adonis/Lucid/Database");
+        await Database.query()
+            .from('devices')
+            .where({ id: id }).update(
+                'session', session ? JSON.stringify(session, null) : null
+            )
+    }
 
     public async findAll(): Promise<Device[]> {
 
@@ -18,6 +26,7 @@ class BaseDeviceRepository implements DeviceRepository {
                 name: row.name,
                 token: row.token,
                 status: row.status,
+                session: row.session,
                 data: row
             }
             return device;
@@ -37,6 +46,7 @@ class BaseDeviceRepository implements DeviceRepository {
             name: row.name,
             token: row.token,
             status: row.status,
+            session: row.session,
             data: row
         }
         return device;

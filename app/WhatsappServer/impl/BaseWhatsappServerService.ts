@@ -22,9 +22,15 @@ class BaseWhatsappServerService implements WhatsappServerService {
         devices.forEach((device) => {
             let whatsAppDevice: WhatsappDevice = {
                 id: device.id,
-                name: device.name
+                name: device.name,
+                session: device.data.session
             }
-            this.clients[device.id] = new BaseWhatsappClient(whatsAppDevice);
+            try {
+                this.clients[device.id] = new BaseWhatsappClient(whatsAppDevice);
+            } catch (error) {
+
+            }
+
         });
         this.booted = true;
     }

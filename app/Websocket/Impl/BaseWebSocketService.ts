@@ -27,7 +27,10 @@ class BaseWebSocketService implements WebSocketService {
 
         this.io.on("connection", async (socket) => {
 
-            socket.join("device-" + socket.handshake.query.deviceId);
+
+            if (socket.handshake.query.deviceId) {
+                socket.join("device-" + socket.handshake.query.deviceId);
+            }
 
             socket.on("request-qr", (deviceId: any, callback: (response: RequestQrResponse) => void) => {
 
@@ -37,9 +40,13 @@ class BaseWebSocketService implements WebSocketService {
 
                 let client = whatsappServer.getClient(deviceId);
                 if (client) {
-                    response.success = true;
-                    response.device = client.getDevice();
-                    response.qrText = client.getQrText();
+
+                    let qrText = client.getQrText();
+                    if (qrText) {
+                        response.success = true;
+                        response.device = client.getDevice();
+                        response.qrText = client.getQrText();
+                    }
                 }
 
                 callback(response);
@@ -51,8 +58,8 @@ class BaseWebSocketService implements WebSocketService {
         });
     }
 
-    public getIo() {
-        return this.io;
+    public emitTo(room: string, event: string, ...args: any[]) {
+        this.io.to(room).emit(event, ...args)
     }
 
 }

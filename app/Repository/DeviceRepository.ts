@@ -7,4 +7,6 @@ export interface DeviceRepository {
 
     findById(id: any): Promise<Device>
 
+    updateSession(id: any, session: any): Promise<void>
+
 }
