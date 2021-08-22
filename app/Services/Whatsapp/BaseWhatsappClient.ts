@@ -4,12 +4,13 @@ import { DisconnectReason, WAChatUpdate, WAConnection } from '@adiwajshing/baile
 import SocketServer from 'socket.io'
 
 import { WhatsappClient, Device } from 'Contracts/Whatsappserver/WhatsappServerService';
-import { WebsocketService } from 'Contracts/Websocket/WebsocketService';
+import { WebsocketService } from 'Contracts/WebsocketService';
 
 export default class BaseWhatsappClient implements WhatsappClient {
 
-    private device: Device;
     private conn = new WAConnection();
+
+    private device: Device;
     private qrText: string;
 
     constructor(device: Device) {
@@ -18,6 +19,10 @@ export default class BaseWhatsappClient implements WhatsappClient {
             name: device.name
         }
         this.init();
+    }
+
+    public getDeviceId(): string {
+        return this.device.id;
     }
 
     private init(): void {

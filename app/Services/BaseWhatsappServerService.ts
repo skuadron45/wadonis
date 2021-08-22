@@ -1,8 +1,9 @@
 import Application from '@ioc:Adonis/Core/Application'
 
-import { WhatsappServerService } from "Contracts/Whatsappserver/WhatsappServerService";
+import { Device, WhatsappServerService } from "Contracts/Whatsappserver/WhatsappServerService";
 
 import BaseWhatsappClient from 'App/Services/Whatsapp/BaseWhatsappClient';
+import _ from 'lodash';
 
 class BaseWhatsappServerService implements WhatsappServerService {
 
@@ -16,9 +17,17 @@ class BaseWhatsappServerService implements WhatsappServerService {
         }
 
         let Database = Application.container.resolveBinding("Adonis/Lucid/Database");
-        let devices = await Database.query()
+        let rows = await Database.query()
             .from('devices')
             .select('*');
+
+        let devices = rows.map((row) => {
+            let device: Device = {
+                id: row.id,
+                name: row.name
+            }
+            return device;
+        });
         devices.forEach(device => {
             this.clients[device.id] = new BaseWhatsappClient(device);
         });

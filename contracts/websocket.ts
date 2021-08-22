@@ -7,7 +7,7 @@
 
 declare module '@ioc:App/WebsocketService' {
 
-  import { WebsocketService } from "Contracts/Websocket/WebsocketService";
+  import { WebsocketService } from "Contracts/WebsocketService";
 
   const instance: WebsocketService;
   export default instance

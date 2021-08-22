@@ -5,8 +5,10 @@ export type Device = {
 
 export interface WhatsappClient {
 
-    getQrText(): string;
+    getDeviceId(): string;
     getDevice(): Device;
+    getQrText(): string;
+
 }
 
 export interface WhatsappServerService {
