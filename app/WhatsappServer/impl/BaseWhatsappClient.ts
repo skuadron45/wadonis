@@ -5,20 +5,18 @@ import SocketServer from 'socket.io'
 
 import { WebSocketService, BIND_KEY } from 'App/Websocket/WebSocketService';
 
-import { WhatsappClient, Device } from 'App/WhatsappServer/WhatsappClient';
+import { WhatsappClient, WhatsappDevice } from 'App/WhatsappServer/WhatsappClient';
 
 export default class BaseWhatsappClient implements WhatsappClient {
 
     private conn = new WAConnection();
 
-    private device: Device;
+    private device: WhatsappDevice;
     private qrText: string;
 
-    constructor(device: Device) {
-        this.device = <Device>{
-            id: device.id,
-            name: device.name
-        }
+    constructor(device: WhatsappDevice) {
+
+        this.device = device;
         this.init();
     }
 
@@ -72,7 +70,7 @@ export default class BaseWhatsappClient implements WhatsappClient {
         return this.qrText;
     }
 
-    public getDevice(): Device {
+    public getDevice(): WhatsappDevice {
         return this.device;
     }
 }

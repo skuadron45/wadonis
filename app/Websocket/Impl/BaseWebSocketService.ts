@@ -23,7 +23,7 @@ class BaseWebSocketService implements WebSocketService {
     }
 
     private initListener() {
-        let whatsappServer = Application.container.resolveBinding(WhatsappServerService.BIND_KEY);
+        let whatsappServer = <WhatsappServerService.WhatsappServerService>Application.container.resolveBinding(WhatsappServerService.BIND_KEY);
 
         this.io.on("connection", async (socket) => {
 

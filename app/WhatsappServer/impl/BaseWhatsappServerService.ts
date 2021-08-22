@@ -1,7 +1,8 @@
+import { DeviceRepository, BIND_KEY } from 'App/Repository/DeviceRepository';
 import { WhatsappServerService } from 'App/Whatsappserver/WhatsappServerService';
+import { WhatsappDevice } from 'App/WhatsappServer/WhatsappClient';
 
 import Application from '@ioc:Adonis/Core/Application'
-import { Device } from 'App/WhatsappServer/WhatsappClient';
 import BaseWhatsappClient from 'App/WhatsappServer/impl/BaseWhatsappClient';
 
 class BaseWhatsappServerService implements WhatsappServerService {
@@ -15,20 +16,15 @@ class BaseWhatsappServerService implements WhatsappServerService {
             return;
         }
 
-        let Database = Application.container.resolveBinding("Adonis/Lucid/Database");
-        let rows = await Database.query()
-            .from('devices')
-            .select('*');
+        let deviceRepository = <DeviceRepository>Application.container.resolveBinding(BIND_KEY);
+        let devices = await deviceRepository.findAll();
 
-        let devices = rows.map((row) => {
-            let device: Device = {
-                id: row.id,
-                name: row.name
+        devices.forEach((device) => {
+            let whatsAppDevice: WhatsappDevice = {
+                id: device.id,
+                name: device.name
             }
-            return device;
-        });
-        devices.forEach(device => {
-            this.clients[device.id] = new BaseWhatsappClient(device);
+            this.clients[device.id] = new BaseWhatsappClient(whatsAppDevice);
         });
         this.booted = true;
     }

@@ -1,12 +1,12 @@
-export type Device = {
+export type WhatsappDevice = {
     id: string,
     name: string
 }
 
 export interface WhatsappClient {
 
+    getDevice(): WhatsappDevice;
     getDeviceId(): string;
-    getDevice(): Device;
     getQrText(): string;
 
 }
