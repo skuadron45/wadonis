@@ -3,18 +3,13 @@ import Application from '@ioc:Adonis/Core/Application'
 import { Server as SocketServer } from 'socket.io'
 
 import { RequestQrResponse, WebsocketService } from 'Contracts/WebsocketService';
-import { WhatsappServerService } from 'Contracts/Whatsappserver/WhatsappServerService';
+
+import { WhatsappServerService } from 'Contracts/WhatsappServerService';
 
 class BaseWebsocketService implements WebsocketService {
 
     private booted = false;
     private io: SocketServer
-
-    private whatsappServer: WhatsappServerService;
-
-    constructor() {
-        this.whatsappServer = Application.container.resolveBinding("App/WhatsappServerService");
-    }
 
     public async boot() {
         if (this.booted) {
@@ -29,6 +24,8 @@ class BaseWebsocketService implements WebsocketService {
     }
 
     private initListener() {
+        let whatsappServer = <WhatsappServerService>Application.container.resolveBinding("App/WhatsappServerService");
+
         this.io.on("connection", async (socket) => {
 
             socket.join("device-" + socket.handshake.query.deviceId);
@@ -39,7 +36,7 @@ class BaseWebsocketService implements WebsocketService {
                     success: false
                 }
 
-                let client = this.whatsappServer.getClient(deviceId);
+                let client = whatsappServer.getClient(deviceId);
                 if (client) {
                     response.success = true;
                     response.device = client.getDevice();
@@ -58,7 +55,6 @@ class BaseWebsocketService implements WebsocketService {
     public getIo() {
         return this.io;
     }
-
 
 }
 export default BaseWebsocketService;

@@ -1,9 +1,8 @@
 import Application from '@ioc:Adonis/Core/Application'
 
-import { Device, WhatsappServerService } from "Contracts/Whatsappserver/WhatsappServerService";
+import { Device, WhatsappServerService } from "Contracts/WhatsappServerService";
 
 import BaseWhatsappClient from 'App/Services/Whatsapp/BaseWhatsappClient';
-import _ from 'lodash';
 
 class BaseWhatsappServerService implements WhatsappServerService {
 
