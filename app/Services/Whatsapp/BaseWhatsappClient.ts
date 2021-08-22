@@ -1,12 +1,10 @@
 import Application from '@ioc:Adonis/Core/Application';
 import { DisconnectReason, WAChatUpdate, WAConnection } from '@adiwajshing/baileys';
-import { WebsocketService } from '@ioc:App/WebsocketService';
-
-import { Device } from '@ioc:App/WhatsappServerService';
-
-import {WhatsappClient} from 'Contracts/constants';
 
 import SocketServer from 'socket.io'
+
+import { WhatsappClient, Device } from 'Contracts/Whatsappserver/WhatsappServerService';
+import { WebsocketService } from 'Contracts/Websocket/WebsocketService';
 
 export default class BaseWhatsappClient implements WhatsappClient {
 

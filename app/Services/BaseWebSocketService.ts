@@ -1,9 +1,9 @@
 import Application from '@ioc:Adonis/Core/Application'
 
-import { WebsocketService, RequestQrResponse } from "@ioc:App/WebsocketService";
-import { WhatsappServerService } from 'App/WhatsappServerService';
-
 import { Server as SocketServer } from 'socket.io'
+
+import { RequestQrResponse, WebsocketService } from 'Contracts/Websocket/WebsocketService';
+import { WhatsappServerService } from 'Contracts/Whatsappserver/WhatsappServerService';
 
 class BaseWebsocketService implements WebsocketService {
 

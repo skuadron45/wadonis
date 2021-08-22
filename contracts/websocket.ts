@@ -7,21 +7,8 @@
 
 declare module '@ioc:App/WebsocketService' {
 
-  export type RequestQrResponse = {
-    success: boolean,
-    device?: any,
-    qrText?: string
-  };
-
-  export interface WebsocketService {
-
-    boot(): Promise<void>;
-
-    getIo(): any;
-
-  }
+  import { WebsocketService } from "Contracts/Websocket/WebsocketService";
 
   const instance: WebsocketService;
   export default instance
-
 }

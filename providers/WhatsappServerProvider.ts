@@ -37,7 +37,7 @@ export default class WhatsappServerProvider {
 
   public async ready() {
     if (this.app.environment === 'web') {
-      let whatsappServerService = this.app.container.resolveBinding("App/WhatsappServerService");      
+      let whatsappServerService = <BaseWhatsappServerService>this.app.container.resolveBinding("App/WhatsappServerService");
       whatsappServerService.boot();
     }
   }

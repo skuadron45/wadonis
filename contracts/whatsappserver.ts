@@ -7,7 +7,7 @@
 
 declare module '@ioc:App/WhatsappServerService' {
 
-  import { WhatsappServerService } from "App/WhatsappServerService";
+  import { WhatsappServerService } from "Contracts/Whatsappserver/WhatsappServerService";
   
   const instance: WhatsappServerService;
   export default instance

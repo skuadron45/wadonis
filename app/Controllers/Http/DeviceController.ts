@@ -1,4 +1,3 @@
-import WhatsappServerService from '@ioc:App/WhatsappServerService';
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
 import Database from '@ioc:Adonis/Lucid/Database';
 
@@ -25,8 +24,6 @@ export default class DeviceController {
     }
 
     public async qrcode({ view, params }: HttpContextContract) {
-
-        console.log(WhatsappServerService);
 
         let id = params.id
         let device = await Database.query()
