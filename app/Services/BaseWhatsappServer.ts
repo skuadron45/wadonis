@@ -1,45 +1,32 @@
-import { WAConnection } from '@adiwajshing/baileys';
 
 import Application from '@ioc:Adonis/Core/Application'
 import { WhatsappServer } from "@ioc:App/WhatsappServer";
-
-class WaManager {
-
-    public conn = new WAConnection();
-
-    public callback: (qr: string) => void = () => {
-
-    };
-
-    public initConnection() {
-        // this.conn.connectOptions.logQR = false;        
-        this.conn.on('open', () => {
-
-        });
-        this.conn.connect();
-    }
-
-    public onQr(callback: (qr: string) => void) {
-        this.callback = callback;
-        this.conn.on('qr', (qr: string) => {
-            this.callback(qr);
-        });
-    }
-}
+import WhatsappClient from './WhatsappClient';
 
 class BaseWhatsappServer implements WhatsappServer {
 
-    public async boot() {
-        let Database = Application.container.make("Adonis/Lucid/Database");
+    private booted = false;
+    protected clients: { [deviceId: string]: WhatsappClient } = {};
 
-        console.log("whatsapp server booted");
+    public async boot() {
+
+        if (this.booted) {
+            return;
+        }
+        let Database = Application.container.make("Adonis/Lucid/Database");
         let devices = await Database.query()
             .from('devices')
             .select('*');
+        devices.forEach(device => {
+            this.clients[device.id] = new WhatsappClient(device);
+        });
+        this.booted = true;
     }
 
-    public async test() {
-
+    public getClient(deviceId: any): WhatsappClient {
+        return this.clients[deviceId];
     }
+
+
 }
 export default BaseWhatsappServer;

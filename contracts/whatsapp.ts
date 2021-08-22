@@ -5,12 +5,16 @@
  * file.
  */
 
+
 declare module '@ioc:App/WhatsappServer' {
+
+  import WhatsappClient from "App/Services/WhatsappClient";
 
   export interface WhatsappServer {
 
     boot(): Promise<void>;
-    test(): Promise<void>;
+
+    getClient(deviceId: any): WhatsappClient;
 
   }
   const instance: WhatsappServer;

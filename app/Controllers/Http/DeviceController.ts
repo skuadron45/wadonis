@@ -12,7 +12,7 @@ export default class DeviceController {
         let data: any = {};
 
         data.devices = devices.map((device, index) => {
-            device.index = index + 1;
+            device.index = index + 1;            
             return device
         });
         return view.render("device/index", data);

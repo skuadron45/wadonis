@@ -11,6 +11,8 @@ declare module '@ioc:App/WebsocketService' {
 
     boot(): Promise<void>;
 
+    getIo(): any;
+
   }
 
   const instance: WebsocketService;

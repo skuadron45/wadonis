@@ -5,33 +5,40 @@ import $ from 'jquery';
 
 import QRCode from 'qrcode';
 
-const socket = io();
-// socket.on('refresh-qr', (data) => {
+const socket = io({
+    query: {
+        deviceId: deviceId
+    }
+});
 
-// });
+function generateQr(qrText) {
+    console.log(qrText);
+    let opts = {
+        errorCorrectionLevel: 'H',
+        type: 'image/jpeg',
+        width: '300'
+    };
+    QRCode.toCanvas(document.getElementById('qr-image'), qrText, opts, function (error) {
+    })
+}
+
+socket.on('qr-refreshed', (qrText) => {
+    $('#qr-spinner').show();
+    generateQr(qrText);
+    $('#qr-spinner').hide();
+});
 
 function requestQr() {
-    socket.emit("request-qr", (response) => {
-        let opts = {
-            errorCorrectionLevel: 'H',
-            type: 'image/jpeg',
-            width: '300'
-        };
-        let text = '1@T3yaMex96CQ2qVbuqlFClwTx7IzGQOsSLhdUjehNGQHgdWqVktCt3UMpa3j6Ry+aL3zE+Sfa+s1yGw==';
-        QRCode.toCanvas(document.getElementById('qr-image'), text, opts, function (error) {
-        })
+    socket.emit("request-qr", deviceId, (response) => {
+        generateQr(response.qrText);
         $('#qr-spinner').hide();
     });
 }
 $("#btn-refresh-qr").on("click", () => {
     $('#qr-spinner').show();
-    setTimeout(() => {
-        requestQr();
-    }, 2000);
-});
-
-setTimeout(() => {
     requestQr();
-}, 2000);
+});
+requestQr();
+
 
 

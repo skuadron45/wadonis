@@ -8,22 +8,22 @@
         <div class="card">
             <div class="card-body">
                 <div class="row justify-content-center">
-                    <div class="col-4 text-center">
+                    <div class="col col-sm-8 text-center">
 
                         <div class="row mb-2">
                             <div class="col">
                                 <div class="qr-wrapper">
                                     <span id="qr-spinner">
                                         <span><i class="fa fa-spinner fa-spin"></i></span>
-                                    </span>                                    
+                                    </span>
                                     <canvas id="qr-image"></canvas>
                                 </div>
                             </div>
                         </div>
-                        <button id="btn-refresh-qr" class="btn btn-sm btn-primary">Refresh</button>
+                        {{--  <button id="btn-refresh-qr" class="btn btn-sm btn-primary">Refresh</button>  --}}
 
+                        <p>{{device.name}}</p>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -37,5 +37,9 @@
 @endsection
 
 @section('page-script')
+<script>
+    var deviceId = {{device.id}};    
+</script>
+
 @entryPointScripts('deviceqr')
 @endsection
