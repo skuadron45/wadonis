@@ -7,6 +7,11 @@
 
 declare module '@ioc:App/WebsocketService' {
 
+  export type RequestQrResponse = {
+    device: any,
+    qrText: string
+  };
+
   export interface WebsocketService {
 
     boot(): Promise<void>;

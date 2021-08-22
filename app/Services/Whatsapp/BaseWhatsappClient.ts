@@ -2,14 +2,11 @@ import Application from '@ioc:Adonis/Core/Application';
 import { DisconnectReason, WAChatUpdate, WAConnection } from '@adiwajshing/baileys';
 import { WebsocketService } from '@ioc:App/WebsocketService';
 
+import { WhatsappClient, Device } from '@ioc:App/WhatsappServerService';
+
 import SocketServer from 'socket.io'
 
-type Device = {
-    id: string,
-    name: string
-}
-
-export default class WhatsappClient {
+export default class BaseWhatsappClient implements WhatsappClient {
 
     private device: Device;
     private conn = new WAConnection();

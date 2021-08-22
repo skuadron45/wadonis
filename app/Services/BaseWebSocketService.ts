@@ -1,23 +1,18 @@
 import Application from '@ioc:Adonis/Core/Application'
-import { WebsocketService } from "@ioc:App/WebsocketService";
-import { WhatsappServer } from '@ioc:App/WhatsappServer';
+import { WebsocketService, RequestQrResponse } from "@ioc:App/WebsocketService";
+import { WhatsappServerService } from '@ioc:App/WhatsappServerService';
 
 import { Server as SocketServer } from 'socket.io'
-
-type RequestQrResponse = {
-    device: any,
-    qrText: string
-};
 
 class BaseWebsocketService implements WebsocketService {
 
     private booted = false;
     private io: SocketServer
 
-    private whatsappServer: WhatsappServer;
+    private whatsappServer: WhatsappServerService;
 
     constructor() {
-        this.whatsappServer = Application.container.make("App/WhatsappServer");
+        this.whatsappServer = Application.container.make("App/WhatsappServerService");
     }
 
     public async boot() {

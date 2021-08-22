@@ -1,5 +1,4 @@
 import { ApplicationContract } from '@ioc:Adonis/Core/Application'
-import BaseWhatsappServerService from 'App/Services/BaseWhatsappServerService'
 
 /*
 |--------------------------------------------------------------------------
@@ -20,26 +19,23 @@ import BaseWhatsappServerService from 'App/Services/BaseWhatsappServerService'
 | }
 |
 */
-export default class WhatsappServerProvider {
-  constructor(protected app: ApplicationContract) {
+export default class RepositoryServiceProvider {
+  constructor (protected app: ApplicationContract) {
   }
 
-  public register() {
-    this.app.container.singleton('App/WhatsappServerService', () => new BaseWhatsappServerService())
+  public register () {
+    
   }
 
-  public async boot() {
-
+  public async boot () {
+    
   }
 
-  public async ready() {
-    if (this.app.environment === 'web') {
-      let WhatsappServerService = this.app.container.make("App/WhatsappServerService");
-      WhatsappServerService.boot();
-    }
+  public async ready () {
+    
   }
 
-  public async shutdown() {
-
+  public async shutdown () {
+    
   }
 }

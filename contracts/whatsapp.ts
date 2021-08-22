@@ -6,17 +6,28 @@
  */
 
 
-declare module '@ioc:App/WhatsappServer' {
+declare module '@ioc:App/WhatsappServerService' {
 
-  import WhatsappClient from "App/Services/WhatsappClient";
+  export type Device = {
+    id: string,
+    name: string
+  }
 
-  export interface WhatsappServer {
+  export interface WhatsappClient {
+
+    getQrText(): string;
+
+    getDevice(): Device;
+
+  }
+
+  export interface WhatsappServerService {
 
     boot(): Promise<void>;
 
     getClient(deviceId: any): WhatsappClient;
 
   }
-  const instance: WhatsappServer;
+  const instance: WhatsappServerService;
   export default instance
 }

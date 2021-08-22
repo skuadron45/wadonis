@@ -1,12 +1,11 @@
-
 import Application from '@ioc:Adonis/Core/Application'
-import { WhatsappServer } from "@ioc:App/WhatsappServer";
-import WhatsappClient from './WhatsappClient';
+import { WhatsappServerService } from "@ioc:App/WhatsappServerService";
+import BaseWhatsappClient from './Whatsapp/BaseWhatsappClient';
 
-class BaseWhatsappServer implements WhatsappServer {
+class BaseWhatsappServerService implements WhatsappServerService {
 
     private booted = false;
-    protected clients: { [deviceId: string]: WhatsappClient } = {};
+    protected clients: { [deviceId: string]: BaseWhatsappClient } = {};
 
     public async boot() {
 
@@ -18,15 +17,15 @@ class BaseWhatsappServer implements WhatsappServer {
             .from('devices')
             .select('*');
         devices.forEach(device => {
-            this.clients[device.id] = new WhatsappClient(device);
+            this.clients[device.id] = new BaseWhatsappClient(device);
         });
         this.booted = true;
     }
 
-    public getClient(deviceId: any): WhatsappClient {
+    public getClient(deviceId: any): BaseWhatsappClient {
         return this.clients[deviceId];
     }
 
 
 }
-export default BaseWhatsappServer;
+export default BaseWhatsappServerService;
