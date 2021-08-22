@@ -1,4 +1,6 @@
-export default interface WebSocketService {
+export const BIND_KEY = "App/Websocket/WebSocketService";
+
+export interface WebSocketService {
     boot(): Promise<void>;
     getIo(): any;
 }

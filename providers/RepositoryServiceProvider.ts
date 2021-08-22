@@ -1,3 +1,4 @@
+import * as DeviceRepository from 'App/Repository/DeviceRepository';
 import { ApplicationContract } from '@ioc:Adonis/Core/Application'
 
 import BaseDeviceRepository from 'App/Repository/QueryBuilder/BaseDeviceRepository'
@@ -27,7 +28,7 @@ export default class RepositoryServiceProvider {
 
   public register() {
 
-    this.app.container.bind("App/Repository/DeviceRepository", () => {
+    this.app.container.bind(DeviceRepository.BIND_KEY, () => {
       return new BaseDeviceRepository();
     })
   }

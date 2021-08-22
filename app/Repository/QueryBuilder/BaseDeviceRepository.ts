@@ -1,4 +1,4 @@
-import DeviceRepository from 'App/Repository/DeviceRepository';
+import { DeviceRepository } from 'App/Repository/DeviceRepository';
 
 class BaseDeviceRepository implements DeviceRepository {
 

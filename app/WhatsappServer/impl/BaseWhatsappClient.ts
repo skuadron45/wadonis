@@ -3,8 +3,9 @@ import { DisconnectReason, WAChatUpdate, WAConnection } from '@adiwajshing/baile
 
 import SocketServer from 'socket.io'
 
-import WebSocketService from 'App/Websocket/WebSocketService';
-import WhatsappClient, { Device } from 'App/WhatsappServer/WhatsappClient';
+import { WebSocketService, BIND_KEY } from 'App/Websocket/WebSocketService';
+
+import { WhatsappClient, Device } from 'App/WhatsappServer/WhatsappClient';
 
 export default class BaseWhatsappClient implements WhatsappClient {
 
@@ -26,7 +27,7 @@ export default class BaseWhatsappClient implements WhatsappClient {
     }
 
     private init(): void {
-        let websocketService = <WebSocketService>Application.container.resolveBinding("App/Websocket/WebSocketService");
+        let websocketService = <WebSocketService>Application.container.resolveBinding(BIND_KEY);
         let io = <SocketServer.Server>websocketService.getIo();
 
         this.conn.on('qr', (qr: string) => {

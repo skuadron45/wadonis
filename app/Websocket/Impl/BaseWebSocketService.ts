@@ -1,7 +1,9 @@
 import Application from '@ioc:Adonis/Core/Application'
 
 import { Server as SocketServer } from 'socket.io'
-import WebSocketService, { RequestQrResponse } from 'App/Websocket/WebSocketService';
+import { WebSocketService, RequestQrResponse } from 'App/Websocket/WebSocketService';
+
+import * as WhatsappServerService from "App/WhatsappServer/WhatsappServerService";
 
 class BaseWebSocketService implements WebSocketService {
 
@@ -21,7 +23,7 @@ class BaseWebSocketService implements WebSocketService {
     }
 
     private initListener() {
-        let whatsappServer = Application.container.resolveBinding("App/WhatsappServer/WhatsappServerService");
+        let whatsappServer = Application.container.resolveBinding(WhatsappServerService.BIND_KEY);
 
         this.io.on("connection", async (socket) => {
 

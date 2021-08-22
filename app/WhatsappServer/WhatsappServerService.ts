@@ -1,6 +1,8 @@
-import WhatsappClient from "App/WhatsappServer/WhatsappClient";
+import { WhatsappClient } from "App/WhatsappServer/WhatsappClient";
 
-export default interface WhatsappServerService {
+export const BIND_KEY = "App/WhatsappServer/WhatsappServerService";
+
+export interface WhatsappServerService {
 
     boot(): Promise<void>;
 
