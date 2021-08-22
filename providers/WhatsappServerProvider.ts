@@ -1,6 +1,5 @@
 import { ApplicationContract } from '@ioc:Adonis/Core/Application'
-
-import BaseWhatsappServerService from 'App/Services/BaseWhatsappServerService'
+import BaseWhatsappServerService from 'App/WhatsappServer/impl/BaseWhatsappServerService';
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +25,7 @@ export default class WhatsappServerProvider {
   }
 
   public register() {
-    this.app.container.singleton('App/WhatsappServerService', () => {
+    this.app.container.singleton('App/WhatsappServer/WhatsappServerService', () => {
       return new BaseWhatsappServerService();
     });
   }
@@ -37,7 +36,7 @@ export default class WhatsappServerProvider {
 
   public async ready() {
     if (this.app.environment === 'web') {
-      let whatsappServerService = <BaseWhatsappServerService>this.app.container.resolveBinding("App/WhatsappServerService");
+      let whatsappServerService = <BaseWhatsappServerService>this.app.container.resolveBinding("App/WhatsappServer/WhatsappServerService");
       whatsappServerService.boot();
     }
   }
