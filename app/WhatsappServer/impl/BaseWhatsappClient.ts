@@ -94,6 +94,7 @@ export default class BaseWhatsappClient implements WhatsappClient {
             this.conn.loadAuthInfo(authInfo);
         }
 
+        this.conn.browserDescription = ["Ryp Whatsapp", "Chrome", "1.0.0"];
         this.conn.logger.level = 'silent';
         this.conn.connectOptions.logQR = false;
         this.conn.autoReconnect = ReconnectMode.onAllErrors;
