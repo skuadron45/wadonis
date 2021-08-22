@@ -22,9 +22,9 @@
     "@adonisjs/core",
     "@adonisjs/session",
     "@adonisjs/view",
-    "@adonisjs/shield",
-    "./providers/WebSocketProvider",
+    "@adonisjs/shield",    
     "@adonisjs/lucid",
+    "./providers/WebSocketProvider",
     "./providers/WhatsappServerProvider",
     "./providers/RepositoryServiceProvider"
   ],

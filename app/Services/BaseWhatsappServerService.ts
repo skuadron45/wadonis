@@ -1,5 +1,7 @@
 import Application from '@ioc:Adonis/Core/Application'
-import { WhatsappServerService } from "@ioc:App/WhatsappServerService";
+
+import { WhatsappServerService } from "App/WhatsappServerService";
+
 import BaseWhatsappClient from './Whatsapp/BaseWhatsappClient';
 
 class BaseWhatsappServerService implements WhatsappServerService {
@@ -12,7 +14,8 @@ class BaseWhatsappServerService implements WhatsappServerService {
         if (this.booted) {
             return;
         }
-        let Database = Application.container.make("Adonis/Lucid/Database");
+
+        let Database = Application.container.resolveBinding("Adonis/Lucid/Database");
         let devices = await Database.query()
             .from('devices')
             .select('*');
@@ -23,9 +26,8 @@ class BaseWhatsappServerService implements WhatsappServerService {
     }
 
     public getClient(deviceId: any): BaseWhatsappClient {
-        return this.clients[deviceId];
+        return this.clients[deviceId] || null;
     }
-
 
 }
 export default BaseWhatsappServerService;

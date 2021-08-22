@@ -8,8 +8,9 @@
 declare module '@ioc:App/WebsocketService' {
 
   export type RequestQrResponse = {
-    device: any,
-    qrText: string
+    success: boolean,
+    device?: any,
+    qrText?: string
   };
 
   export interface WebsocketService {

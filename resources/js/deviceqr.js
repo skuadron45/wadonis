@@ -12,7 +12,6 @@ const socket = io({
 });
 
 function generateQr(qrText) {
-    console.log(qrText);
     let opts = {
         errorCorrectionLevel: 'H',
         type: 'image/jpeg',
@@ -30,8 +29,11 @@ socket.on('qr-refreshed', (qrText) => {
 
 function requestQr() {
     socket.emit("request-qr", deviceId, (response) => {
-        generateQr(response.qrText);
-        $('#qr-spinner').hide();
+        console.log(response);
+        if (response.success) {
+            generateQr(response.qrText);
+            $('#qr-spinner').hide();
+        }
     });
 }
 $("#btn-refresh-qr").on("click", () => {
