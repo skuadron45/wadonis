@@ -23,7 +23,7 @@ export default class DeviceController {
         return view.render("device/create", data);
     }
 
-    public async qrcode({ view, params }: HttpContextContract) {        
+    public async qrcode({ view, params }: HttpContextContract) {
 
         let id = params.id
         let device = await Database.query()

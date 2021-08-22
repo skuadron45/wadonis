@@ -1,5 +1,5 @@
 import { ApplicationContract } from '@ioc:Adonis/Core/Application'
-import BaseWebsocketService from 'App/Services/BaseWebSocketService'
+import BaseWebSocketService from 'App/Websocket/Impl/BaseWebSocketService';
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +25,7 @@ export default class WebSocketProvider {
   }
 
   public register() {
-    this.app.container.singleton('App/WebsocketService', () => new BaseWebsocketService())
+    this.app.container.singleton('App/Websocket/WebSocketService', () => new BaseWebSocketService())
   }
 
   public async boot() {
@@ -34,7 +34,7 @@ export default class WebSocketProvider {
 
   public async ready() {
     if (this.app.environment === 'web') {
-      let WebsocketService = <BaseWebsocketService>this.app.container.resolveBinding("App/WebsocketService");
+      let WebsocketService = <BaseWebSocketService>this.app.container.resolveBinding("App/Websocket/WebSocketService");
       WebsocketService.boot();
     }
 

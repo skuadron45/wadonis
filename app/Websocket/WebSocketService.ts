@@ -4,7 +4,7 @@ export type RequestQrResponse = {
     qrText?: string
 };
 
-export interface WebsocketService {
+export interface WebSocketService {
     boot(): Promise<void>;
     getIo(): any;
 }
