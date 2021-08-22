@@ -3,10 +3,10 @@ export type Device = {
     name: string
 }
 
-export interface WhatsappClient {
-    
+export default interface WhatsappClient {
+
     getDeviceId(): string;
     getDevice(): Device;
     getQrText(): string;
-    
+
 }

@@ -1,6 +1,6 @@
-import { WhatsappClient } from "App/WhatsappServer/WhatsappClient";
+import WhatsappClient from "App/WhatsappServer/WhatsappClient";
 
-export interface WhatsappServerService {
+export default interface WhatsappServerService {
 
     boot(): Promise<void>;
 

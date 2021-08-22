@@ -3,8 +3,8 @@ import { DisconnectReason, WAChatUpdate, WAConnection } from '@adiwajshing/baile
 
 import SocketServer from 'socket.io'
 
-import { WebSocketService } from 'App/Websocket/WebSocketService';
-import { Device, WhatsappClient } from 'App/WhatsappServer/WhatsappClient';
+import WebSocketService from 'App/Websocket/WebSocketService';
+import WhatsappClient, { Device } from 'App/WhatsappServer/WhatsappClient';
 
 export default class BaseWhatsappClient implements WhatsappClient {
 

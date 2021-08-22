@@ -1,5 +1,7 @@
 import { ApplicationContract } from '@ioc:Adonis/Core/Application'
 
+import BaseDeviceRepository from 'App/Repository/QueryBuilder/BaseDeviceRepository'
+
 /*
 |--------------------------------------------------------------------------
 | Provider
@@ -20,22 +22,25 @@ import { ApplicationContract } from '@ioc:Adonis/Core/Application'
 |
 */
 export default class RepositoryServiceProvider {
-  constructor (protected app: ApplicationContract) {
+  constructor(protected app: ApplicationContract) {
   }
 
-  public register () {
-    
+  public register() {
+
+    this.app.container.bind("App/Repository/DeviceRepository", () => {
+      return new BaseDeviceRepository();
+    })
   }
 
-  public async boot () {
-    
+  public async boot() {
+
   }
 
-  public async ready () {
-    
+  public async ready() {
+
   }
 
-  public async shutdown () {
-    
+  public async shutdown() {
+
   }
 }
