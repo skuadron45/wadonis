@@ -31,7 +31,7 @@ export default class WebSocketProvider {
   }
 
   public async boot() {
-
+    
   }
 
   public async ready() {

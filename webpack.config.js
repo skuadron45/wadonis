@@ -62,6 +62,15 @@ Encore.addEntry('deviceqr', './resources/js/deviceqr.js')
 //   from: './resources/images',
 //   to: 'images/[path][name].[hash:8].[ext]',
 // })
+// Encore.copyFiles({
+//   from: './resources/argon/img',
+//   to: 'img/[path][name].[hash:8].[ext]'
+// })
+
+// Encore.copyFiles({
+//   from: './resources/argon/fonts',
+//   to: 'fonts/[path][name].[hash:8].[ext]'
+// })
 
 /*
 |--------------------------------------------------------------------------
@@ -201,6 +210,24 @@ Encore.configureCssLoader(() => { })
 //   QRCode: 'qrcode',
 //   io: 'socket.io-client'
 // }))
+
+const CopyPlugin = require("copy-webpack-plugin");
+Encore.addPlugin(new CopyPlugin({
+  patterns: [
+    {
+      from: './node_modules/startbootstrap-sb-admin-2/img',
+      to: 'sbadmin2/img/[path][name].[contenthash][ext]'
+    },
+    {
+      from: './node_modules/startbootstrap-sb-admin-2/vendor',
+      to: 'sbadmin2/vendor/[path][name].[contenthash][ext]'
+    },
+    {
+      from: './node_modules/startbootstrap-sb-admin-2/js',
+      to: 'sbadmin2/js/[path][name].[contenthash][ext]'
+    }
+  ]
+}));
 
 /*
 |--------------------------------------------------------------------------

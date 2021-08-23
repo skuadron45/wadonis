@@ -1,4 +1,4 @@
-@layout('layouts/main')
+@layout('layouts/sbadmin2')
 
 @section('page-content')
 <h1 class="mt-4">Devices</h1>
@@ -34,10 +34,15 @@
                 <td>{{device.token}}</td>
                 <td>{{device.status}}</td>
                 <td>
-                  <a href="{{route("device.qrcode",{id:device.id})}}" class="btn btn-sm btn-info"><i
-                      class="fa fa-qrcode"></i></a>
-                  <a href="#!" class="btn btn-sm btn-success"><i class="fa fa-pencil"></i></a>
-                  <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                  <a href="{{route("device.qrcode",{id:device.id})}}" class="btn btn-sm btn-outline-dark">
+                    <i class="mdi mdi-qrcode-scan"></i>
+                  </a>
+                  <a href="#!" class="btn btn-sm btn-outline-success">
+                    <i class="mdi mdi-pencil"></i>
+                  </a>
+                  <button class="btn btn-sm btn-outline-danger">
+                    <i class="mdi mdi-trash-can-outline"></i>
+                  </button>
                 </td>
               </tr>
               @endeach
