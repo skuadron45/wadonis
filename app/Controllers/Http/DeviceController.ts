@@ -14,7 +14,8 @@ export default class DeviceController {
 
             let deviceCustom = device.data;
             deviceCustom.index = index + 1;
-            deviceCustom.status = data.session ? "Tersambung" : "Belum tersambung";
+            deviceCustom.status = data.session ? "<span class='badge badge-success'>Tersambung</span>" : "<span class='badge badge-danger'>Belum Tersambung</span>";
+            deviceCustom.needQr = data.session ? false : true;
 
             return deviceCustom
         });
@@ -39,5 +40,20 @@ export default class DeviceController {
             device: device.data
         };
         return view.render("device/qrcode", data);
+    }
+
+    public async event({ view, params, response }: HttpContextContract) {
+
+        let id = params.id
+        let device = await DeviceRepository.findById(id);
+
+        if (!device.session) {
+            response.redirect().toRoute('device.index');
+        }
+
+        let data: any = {
+            device: device.data
+        };
+        return view.render("device/event", data);
     }
 }

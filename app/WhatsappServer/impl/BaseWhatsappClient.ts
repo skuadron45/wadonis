@@ -1,5 +1,5 @@
 import Application from '@ioc:Adonis/Core/Application';
-import { DisconnectReason, ReconnectMode, WAChatUpdate, WAConnection } from '@adiwajshing/baileys';
+import { DisconnectReason, MessageType, ReconnectMode, unixTimestampSeconds, WAChatUpdate, WAConnection, WAContact, whatsappID } from '@adiwajshing/baileys';
 
 import { WebSocketService, BIND_KEY, RequestQrResponse } from 'App/Websocket/WebSocketService';
 
@@ -14,10 +14,22 @@ export default class BaseWhatsappClient implements WhatsappClient {
     private device: WhatsappDevice;
     private qrText: string | null;
 
+    private contacts: Partial<WAContact>[] = [];
+
     constructor(device: WhatsappDevice) {
         this.device = device;
 
         this.init();
+    }
+
+    public async sendMessage(phone: string, message: string) {
+
+        let type = MessageType.text;
+        await this.conn.sendMessage(phone + "@s.whatsapp.net", message, type);
+    }
+
+    public async getContacts(): Promise<any> {
+        return this.contacts;
     }
 
     public getDeviceId(): string {
@@ -41,7 +53,6 @@ export default class BaseWhatsappClient implements WhatsappClient {
             websocketService.emitTo("device-" + this.device.id, "qr-refreshed", response);
         });
 
-
         this.conn.on('open', async () => {
             console.log("Device id: " + this.device.id + " - " + "Open");
 
@@ -52,6 +63,14 @@ export default class BaseWhatsappClient implements WhatsappClient {
 
             await deviceRepository.updateSession(this.device.id, authInfo);
             websocketService.emitTo("device-" + this.device.id, "session-changed");
+        });
+
+        this.conn.on('contacts-received', async (u) => {
+            console.log("Device id: " + this.device.id + " - " + "Contacts Received");
+            console.log(u.updatedContacts);
+
+            let updates = u.updatedContacts;
+            this.contacts.push(...updates);
         });
 
         this.conn.on('CB:action,,battery', json => {
@@ -74,6 +93,8 @@ export default class BaseWhatsappClient implements WhatsappClient {
                 console.log(messages.last)
                 console.log(messages.length)
             }
+
+            websocketService.emitTo("device-" + this.device.id, "chat-update", whatsappID(this.conn.user.jid), chat);
 
         });
 

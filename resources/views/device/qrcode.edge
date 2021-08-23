@@ -2,6 +2,13 @@
 
 @section('page-content')
 <h1 class="mt-4">Scan QR</h1>
+<div class="row mb-2">
+    <div class="col">
+        <div class="btn-group" role="group" aria-label="Kembali">
+            <a href="{{ route('device.index')}}" class="btn btn-danger">Kembali</a>
+        </div>
+    </div>
+</div>
 
 <div class="row">
     <div class="col">
@@ -33,7 +40,7 @@
 @endsection
 
 @section('page-style')
-@entryPointStyles('deviceqr')
+@entryPointStyles('device-qr')
 @endsection
 
 @section('page-script')
@@ -41,5 +48,5 @@
     var deviceId = {{device.id}};    
 </script>
 
-@entryPointScripts('deviceqr')
+@entryPointScripts('device-qr')
 @endsection

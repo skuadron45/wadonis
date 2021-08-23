@@ -16,28 +16,35 @@
 
       <div class="card-body">
         <div class="table-responsive">
-          <table class="table text-nowrap" style="width:100%">
+          <table class="table text-nowrap">
             <thead>
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
-                <th scope="col">Api Key</th>
-                <th scope="col">Status</th>
-                <th scope="col">Action</th>
+                <th style="width:260px" class="text-center" scope="col">Api Key</th>
+                <th class="text-center" scope="col">Status</th>
+                <th class="text-center" scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
               @each(device in devices)
               <tr>
-                <td>{{device.index}}</td>
-                <td>{{device.name}} ( device id: {{device.id}} )</td>
-                <td>{{device.token}}</td>
-                <td>{{device.status}}</td>
-                <td>
+                <td class="align-middle">{{device.index}}</td>
+                <td class="align-middle">{{device.name}}
+                  <br>( device id: {{device.id}} )</td>
+                <td class="text-center align-middle">
+                  <div class="card text-center bg-light">{{device.token}}</div>
+                </td>
+                <td class="text-center align-middle">{{{device.status}}}</td>
+                <td class="text-center align-middle">
+
+                  @if(device.needQr)
                   <a href="{{route("device.qrcode",{id:device.id})}}" class="btn btn-sm btn-outline-dark">
                     <i class="mdi mdi-qrcode-scan"></i>
                   </a>
-                  <a href="#!" class="btn btn-sm btn-outline-success">
+                  @endif
+
+                  <a href="{{route("device.event",{id:device.id})}}" class="btn btn-sm btn-outline-success">
                     <i class="mdi mdi-pencil"></i>
                   </a>
                   <button class="btn btn-sm btn-outline-danger">

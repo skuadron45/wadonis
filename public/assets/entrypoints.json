@@ -8,12 +8,20 @@
         "http://localhost:8080/assets/app.js"
       ]
     },
-    "deviceqr": {
+    "device-qr": {
       "css": [
-        "http://localhost:8080/assets/deviceqr.css"
+        "http://localhost:8080/assets/device-qr.css"
       ],
       "js": [
-        "http://localhost:8080/assets/deviceqr.js"
+        "http://localhost:8080/assets/device-qr.js"
+      ]
+    },
+    "device-event": {
+      "css": [
+        "http://localhost:8080/assets/device-event.css"
+      ],
+      "js": [
+        "http://localhost:8080/assets/device-event.js"
       ]
     }
   }

@@ -3,7 +3,7 @@ import Application from '@ioc:Adonis/Core/Application'
 import { Server as SocketServer } from 'socket.io'
 import { WebSocketService, RequestQrResponse } from 'App/Websocket/WebSocketService';
 
-import * as WhatsappServerService from "App/WhatsappServer/WhatsappServerService";
+import { WhatsappServerService, BIND_KEY } from "App/WhatsappServer/WhatsappServerService";
 
 class BaseWebSocketService implements WebSocketService {
 
@@ -23,14 +23,32 @@ class BaseWebSocketService implements WebSocketService {
     }
 
     private initListener() {
-        let whatsappServer = <WhatsappServerService.WhatsappServerService>Application.container.resolveBinding(WhatsappServerService.BIND_KEY);
+        let whatsappServer = <WhatsappServerService>Application.container.resolveBinding(BIND_KEY);
 
         this.io.on("connection", async (socket) => {
-
 
             if (socket.handshake.query.deviceId) {
                 socket.join("device-" + socket.handshake.query.deviceId);
             }
+
+            socket.on("send-message", async (deviceId: any, data: any, callback: (data: any) => void) => {
+
+                let client = whatsappServer.getClient(deviceId);
+                if (client) {
+                    await client.sendMessage(data.phone, data.message);
+                    callback("terkirim");
+                }
+            });
+
+            socket.on("load-contact", async (deviceId: any, callback: (data: any) => void) => {
+
+                let client = whatsappServer.getClient(deviceId);
+                if (client) {
+                    let contacts = await client.getContacts();
+                    callback(contacts);
+                }
+
+            });
 
             socket.on("request-qr", (deviceId: any, callback: (response: RequestQrResponse) => void) => {
 

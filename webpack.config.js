@@ -46,7 +46,8 @@ Encore.setPublicPath('/assets')
 |
 */
 Encore.addEntry('app', './resources/js/app.js')
-Encore.addEntry('deviceqr', './resources/js/deviceqr.js')
+Encore.addEntry('device-qr', './resources/js/device-qr.js')
+Encore.addEntry('device-event', './resources/js/device-event.js')
 
 /*
 |--------------------------------------------------------------------------
