@@ -24,9 +24,10 @@
     "@adonisjs/view",
     "@adonisjs/shield",
     "@adonisjs/lucid",
+    "@adonisjs/auth",
     "./providers/RepositoryServiceProvider",
     "./providers/WebSocketProvider",
-    "./providers/WhatsappServerProvider"
+    "./providers/WhatsappServerProvider"    
   ],
   "metaFiles": [
     {

@@ -70,9 +70,6 @@ class BaseWebSocketService implements WebSocketService {
                 callback(response);
             });
 
-            // let sockets = await this.io.allSockets();
-            // console.log(socket.id);
-            // console.log(socket.rooms);
         });
     }
 
