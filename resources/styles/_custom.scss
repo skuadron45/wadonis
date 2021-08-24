@@ -1,0 +1,11 @@
+.card {
+  .nav-tabs {
+    .nav-item {
+      &:first-child {
+        .nav-link {
+          border-left: 0;
+        }
+      }
+    }
+  }
+}

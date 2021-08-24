@@ -1,0 +1,58 @@
+@layout('layouts/sbadmin2')
+
+@section('page-content')
+<h1 class="mt-4">Event</h1>
+
+<div class="row">
+  <div class="col">
+
+    <div class="card border-top-0">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#home">Kirim Pesan</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" href="#menu1">Daftar Kontak</a>
+        </li>
+      </ul>
+
+      <div class="card-body">
+        <div class="tab-content">
+          <div class="tab-pane" id="home">
+            <form action="" id="main-form">
+              <div class="form-group">
+                <label for="wa-number">Nomor Whatsapp</label>
+                <input type="text" name="phone" value="6289527568890" class="form-control" placeholder="Wa Number"
+                  id="wa-number">
+              </div>
+              <div class="form-group">
+                <label for="pesan">Pesan</label>
+                <input type="text" name="message" value="test kirim pesan" class="form-control" placeholder="Pesan"
+                  id="message">
+              </div>
+              <button id="btn-send" type="button" class="btn btn-primary">Kirim</button>
+            </form>
+          </div>
+
+          <div class="tab-pane active" id="menu1">
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+@endsection
+
+@section('page-style')
+@entryPointStyles('device-fitur')
+@endsection
+
+@section('page-script')
+<script>
+  const DEVICE_ID = {{device.id}};
+</script>
+
+@entryPointScripts('device-fitur')
+@endsection

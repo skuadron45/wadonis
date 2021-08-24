@@ -42,14 +42,13 @@
                   <a href="{{route("device.qrcode",{id:device.id})}}" class="btn btn-sm btn-outline-dark">
                     <i class="mdi mdi-qrcode-scan"></i>
                   </a>
+                  @else
+                  <a href="{{route("device.fitur",{id:device.id})}}" class="btn btn-sm btn-outline-success">
+                    <i class="mdi mdi-information-outline"></i>
+                  </a>
                   @endif
 
-                  <a href="{{route("device.event",{id:device.id})}}" class="btn btn-sm btn-outline-success">
-                    <i class="mdi mdi-pencil"></i>
-                  </a>
-                  <button class="btn btn-sm btn-outline-danger">
-                    <i class="mdi mdi-trash-can-outline"></i>
-                  </button>
+
                 </td>
               </tr>
               @endeach

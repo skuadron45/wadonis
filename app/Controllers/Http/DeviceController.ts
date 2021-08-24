@@ -42,7 +42,7 @@ export default class DeviceController {
         return view.render("device/qrcode", data);
     }
 
-    public async event({ view, params, response }: HttpContextContract) {
+    public async fitur({ view, params, response }: HttpContextContract) {
 
         let id = params.id
         let device = await DeviceRepository.findById(id);
@@ -54,6 +54,6 @@ export default class DeviceController {
         let data: any = {
             device: device.data
         };
-        return view.render("device/event", data);
+        return view.render("device/fitur", data);
     }
 }

@@ -16,12 +16,12 @@
         "http://localhost:8080/assets/device-qr.js"
       ]
     },
-    "device-event": {
+    "device-fitur": {
       "css": [
-        "http://localhost:8080/assets/device-event.css"
+        "http://localhost:8080/assets/device-fitur.css"
       ],
       "js": [
-        "http://localhost:8080/assets/device-event.js"
+        "http://localhost:8080/assets/device-fitur.js"
       ]
     }
   }
