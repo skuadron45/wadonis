@@ -1,4 +1,5 @@
 const { join } = require('path')
+const { readFileSync } = require('fs');
 const Encore = require('@symfony/webpack-encore')
 
 /*
@@ -162,7 +163,16 @@ Encore.configureDevServerOptions((options) => {
    * Reset client as webpack encore is using an unallowed "host"
    * property.
    */
-  options.client = {}
+  options.client = {
+  }
+  const privateKey = join(__dirname + '/sslCert/wadonis.com+5-key.pem');
+  const certificate = join(__dirname + '/sslCert/wadonis.com+5.pem');
+
+  options.https = {
+    key: privateKey,
+    cert: certificate,
+    requestCert: false
+  }
 })
 
 /*

@@ -2,31 +2,31 @@
   "entrypoints": {
     "app": {
       "css": [
-        "http://localhost:8080/assets/app.css"
+        "https://localhost:8080/assets/app.css"
       ],
       "js": [
-        "http://localhost:8080/assets/app.js"
+        "https://localhost:8080/assets/app.js"
       ]
     },
     "device-qr": {
       "css": [
-        "http://localhost:8080/assets/device-qr.css"
+        "https://localhost:8080/assets/device-qr.css"
       ],
       "js": [
-        "http://localhost:8080/assets/device-qr.js"
+        "https://localhost:8080/assets/device-qr.js"
       ]
     },
     "device-fitur": {
       "css": [
-        "http://localhost:8080/assets/device-fitur.css"
+        "https://localhost:8080/assets/device-fitur.css"
       ],
       "js": [
-        "http://localhost:8080/assets/device-fitur.js"
+        "https://localhost:8080/assets/device-fitur.js"
       ]
     },
     "auth": {
       "js": [
-        "http://localhost:8080/assets/auth.js"
+        "https://localhost:8080/assets/auth.js"
       ]
     }
   }

@@ -30,6 +30,7 @@
     "./providers/WhatsappServerProvider"    
   ],
   "metaFiles": [
+    "sslCert/*",
     {
       "pattern": "public/**",
       "reloadServer": false
