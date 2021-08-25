@@ -5,6 +5,7 @@
   "assets/device-qr.js": "http://localhost:8080/assets/device-qr.js",
   "assets/device-fitur.css": "http://localhost:8080/assets/device-fitur.css",
   "assets/device-fitur.js": "http://localhost:8080/assets/device-fitur.js",
+  "assets/auth.js": "http://localhost:8080/assets/auth.js",
   "assets/sbadmin2/vendor/fontawesome-free/js/all.js": "http://localhost:8080/assets/sbadmin2/vendor/fontawesome-free/js/all.59e2f34a56051de90528.js",
   "assets/sbadmin2/vendor/fontawesome-free/js/all.min.js": "http://localhost:8080/assets/sbadmin2/vendor/fontawesome-free/js/all.min.07185f5cb6c0d44eb2f8.js",
   "assets/fonts/materialdesignicons-webfont.eot": "http://localhost:8080/assets/fonts/materialdesignicons-webfont.53f53f50.eot",

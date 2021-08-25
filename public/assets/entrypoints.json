@@ -23,6 +23,11 @@
       "js": [
         "http://localhost:8080/assets/device-fitur.js"
       ]
+    },
+    "auth": {
+      "js": [
+        "http://localhost:8080/assets/auth.js"
+      ]
     }
   }
 }
