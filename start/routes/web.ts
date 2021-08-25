@@ -1,17 +1,21 @@
 import Route from '@ioc:Adonis/Core/Route'
 
 Route.get('/', async ({ response }) => {
-    response.redirect().toRoute('auth.login.index')
+    response.redirect().toRoute('auth.login')
 }).as("home.index");
 
 Route.group(() => {
-    Route.get('/login', "AuthController.index").as("auth.login.index")
-    Route.post('/login', "AuthController.attempt").as("auth.login.attempt")
-}).prefix('auth');
+    Route.get('/login', "AuthController.login").as("auth.login")
+    Route.post('/login', "AuthController.loginAttempt").as("auth.login.attempt")
+
+    Route.get('/register', "AuthController.register").as("auth.register")
+    Route.post('/register', "AuthController.registerAttempt").as("auth.register.attempt")
+
+}).middleware('guest')
 
 Route.group(() => {
     Route.get('/logout', "AuthController.logout").as("auth.logout")
-}).prefix('auth').middleware('auth')
+}).middleware('auth')
 
 Route.group(() => {
     Route.get('/dashboard', "DashboardController.index").as("dashboard.index")

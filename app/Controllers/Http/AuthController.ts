@@ -3,14 +3,14 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 export default class AuthController {
 
-  public async index({ view, session }: HttpContextContract) {
+  public async login({ view, session }: HttpContextContract) {
     let error = session.flashMessages.get("error");
     let data: any = {};
     data.error = error;
     return view.render("auth/login", data);
   }
 
-  public async attempt({ auth, request, response, session }: HttpContextContract) {
+  public async loginAttempt({ auth, request, response, session }: HttpContextContract) {
 
     const email = request.input('email')
     const password = request.input('password')
