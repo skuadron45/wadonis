@@ -59,7 +59,7 @@ export default class BaseWhatsappClient implements WhatsappClient {
             this.qrText = null;
             const authInfo = this.conn.base64EncodedAuthInfo()
             const authInfoString = JSON.stringify(authInfo, null, '\t');
-            console.log('Auth JSON: ' + authInfoString);
+            // console.log('Auth JSON: ' + authInfoString);
 
             await deviceRepository.updateSession(this.device.id, authInfo);
             websocketService.emitTo("device-" + this.device.id, "session-changed");
@@ -67,7 +67,7 @@ export default class BaseWhatsappClient implements WhatsappClient {
 
         this.conn.on('contacts-received', async (u) => {
             console.log("Device id: " + this.device.id + " - " + "Contacts Received");
-            console.log(u.updatedContacts);
+            // console.log(u.updatedContacts);
 
             let updates = u.updatedContacts;
             this.contacts.push(...updates);
@@ -84,14 +84,14 @@ export default class BaseWhatsappClient implements WhatsappClient {
         this.conn.on('chat-update', (chat: WAChatUpdate) => {
 
             console.log("Device id: " + this.device.id + " - " + "Chat update");
-            console.log(chat);
+            // console.log(chat);
             if (chat.messages) {
                 let messages = chat.messages;
                 let all = chat.messages.all();
-                console.log(all)
-                console.log(messages.first)
-                console.log(messages.last)
-                console.log(messages.length)
+                // console.log(all)
+                // console.log(messages.first)
+                // console.log(messages.last)
+                // console.log(messages.length)
             }
 
             websocketService.emitTo("device-" + this.device.id, "chat-update", whatsappID(this.conn.user.jid), chat);
