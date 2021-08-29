@@ -6,10 +6,14 @@ export type WhatsappDevice = {
 
 export interface WhatsappClient {
 
+    connect(): Promise<void>;    
+
     getDevice(): WhatsappDevice;
-    getDeviceId(): string;
+
     getQrText(): string | null;
+
     sendMessage(phone: string, message: string): Promise<void>;
+
     getContacts(): Promise<any>
 
 }

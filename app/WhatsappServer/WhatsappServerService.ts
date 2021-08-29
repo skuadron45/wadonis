@@ -6,6 +6,6 @@ export interface WhatsappServerService {
 
     boot(): Promise<void>;
 
-    getClient(deviceId: any): WhatsappClient;
+    getClient(deviceId: any): WhatsappClient | null;
 
 }

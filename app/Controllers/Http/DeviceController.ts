@@ -42,7 +42,7 @@ export default class DeviceController {
         return view.render("device/qrcode", data);
     }
 
-    public async fitur({ view, params, response, request }: HttpContextContract) {
+    public async fitur({ view, params, response }: HttpContextContract) {
 
         let id = params.id
         let device = await DeviceRepository.findById(id);

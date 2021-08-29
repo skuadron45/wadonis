@@ -1,6 +1,10 @@
-import * as WhatsappServerService from 'App/Whatsappserver/WhatsappServerService';
 import { ApplicationContract } from '@ioc:Adonis/Core/Application'
+
+import * as WhatsappServerService from 'App/Whatsappserver/WhatsappServerService';
+import * as ClientStore from 'App/Whatsappserver/ClientStore';
+
 import BaseWhatsappServerService from 'App/WhatsappServer/impl/BaseWhatsappServerService';
+import InMemoryClientStore from 'App/WhatsappServer/impl/InMemoryClientStore';
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +32,9 @@ export default class WhatsappServerProvider {
   public register() {
     this.app.container.singleton(WhatsappServerService.BIND_KEY, () => {
       return new BaseWhatsappServerService();
+    });
+    this.app.container.singleton(ClientStore.BIND_KEY, () => {
+      return new InMemoryClientStore();
     });
   }
 

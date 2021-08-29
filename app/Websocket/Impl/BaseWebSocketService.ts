@@ -31,6 +31,24 @@ class BaseWebSocketService implements WebSocketService {
                 socket.join("device-" + socket.handshake.query.deviceId);
             }
 
+            socket.on("request-qr", (deviceId: any, callback: (response: RequestQrResponse) => void) => {
+
+                let response: RequestQrResponse = {
+                    success: false
+                }
+
+                let client = whatsappServer.getClient(deviceId);
+                if (client) {
+                    let qrText = client.getQrText();
+                    if (qrText) {
+                        response.success = true;
+                        response.device = client.getDevice();
+                        response.qrText = client.getQrText();
+                    }
+                }
+                callback(response);
+            });
+
             socket.on("send-message", async (deviceId: any, data: any, callback: (data: any) => void) => {
 
                 let client = whatsappServer.getClient(deviceId);
@@ -47,28 +65,7 @@ class BaseWebSocketService implements WebSocketService {
                     let contacts = await client.getContacts();
                     callback(contacts);
                 }
-
             });
-
-            socket.on("request-qr", (deviceId: any, callback: (response: RequestQrResponse) => void) => {
-
-                let response: RequestQrResponse = {
-                    success: false
-                }
-
-                let client = whatsappServer.getClient(deviceId);
-                if (client) {
-
-                    let qrText = client.getQrText();
-                    if (qrText) {
-                        response.success = true;
-                        response.device = client.getDevice();
-                        response.qrText = client.getQrText();
-                    }
-                }
-                callback(response);
-            });
-
         });
     }
 

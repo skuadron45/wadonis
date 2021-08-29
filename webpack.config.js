@@ -231,12 +231,20 @@ Encore.addPlugin(new CopyPlugin({
       to: 'sbadmin2/img/[path][name].[contenthash][ext]'
     },
     {
-      from: './node_modules/startbootstrap-sb-admin-2/vendor',
-      to: 'sbadmin2/vendor/[path][name].[contenthash][ext]'
+      from: './node_modules/startbootstrap-sb-admin-2/vendor/jquery/jquery.min.js',
+      to: 'sbadmin2/vendor/jquery/[name].[contenthash][ext]'
     },
     {
-      from: './node_modules/startbootstrap-sb-admin-2/js',
-      to: 'sbadmin2/js/[path][name].[contenthash][ext]'
+      from: './node_modules/startbootstrap-sb-admin-2/vendor/bootstrap/js/bootstrap.bundle.min.js',
+      to: 'sbadmin2/vendor/bootstrap/js/[name].[contenthash][ext]'
+    },
+    {
+      from: './node_modules/startbootstrap-sb-admin-2/vendor/jquery-easing/jquery.easing.min.js',
+      to: 'sbadmin2/vendor/jquery-easing/[name].[contenthash][ext]'
+    },
+    {
+      from: './node_modules/startbootstrap-sb-admin-2/js/*.js',
+      to: 'sbadmin2/js/[name].[contenthash][ext]'
     }
   ]
 }));

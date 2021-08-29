@@ -1,4 +1,4 @@
-import Hash from '@ioc:Adonis/Core/Hash'
+// import Hash from '@ioc:Adonis/Core/Hash'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 export default class AuthController {
@@ -23,7 +23,7 @@ export default class AuthController {
     }
   }
 
-  public async logout({ auth, response, session }: HttpContextContract) {
+  public async logout({ auth, response }: HttpContextContract) {
     await auth.use('web').logout();
     response.redirect().toRoute("dashboard.index")
   }
