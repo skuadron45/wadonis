@@ -5,8 +5,10 @@ export type WhatsappDevice = {
 }
 
 export interface WhatsappClient {
-
+    
     connect(): Promise<void>;    
+
+    reconnect(): Promise<void>;   
 
     getDevice(): WhatsappDevice;
 

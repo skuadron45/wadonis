@@ -9,4 +9,6 @@ export interface DeviceRepository {
 
     updateSession(id: any, session: any): Promise<void>
 
+    updateStatus(id: any, status: any): Promise<void>
+
 }

@@ -14,9 +14,10 @@ export default class DeviceController {
 
             let deviceCustom = device.data;
             deviceCustom.index = index + 1;
-            deviceCustom.status = data.session ? "<span class='badge badge-success'>Tersambung</span>" : "<span class='badge badge-danger'>Belum Tersambung</span>";
             deviceCustom.needQr = data.session ? false : true;
 
+            deviceCustom.statusHTML = data.status === 1 ? "<span class='badge badge-success'>Connected</span>" : "<span class='badge badge-danger'>Disconnected</span>";
+            deviceCustom.sessionHTML = data.session ? "<span class='badge badge-success'>Alredy Login</span>" : "<span class='badge badge-danger'>Not Login</span>";
             return deviceCustom
         });
         return view.render("device/index", data);

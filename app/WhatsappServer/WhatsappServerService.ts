@@ -9,3 +9,15 @@ export interface WhatsappServerService {
     getClient(deviceId: any): WhatsappClient | null;
 
 }
+
+export interface ServiceContext {
+
+    clientConnecting(deviceId: string): Promise<void>;
+
+    clientClosed(deviceId: string, isReconnecting: boolean, reason?: string): Promise<void>;
+
+    clientOpened(deviceId: string, authInfo: any): Promise<void>;
+
+    setPhoneConnected(deviceId: string, status: number): Promise<void>;
+
+}

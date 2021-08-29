@@ -4,19 +4,32 @@ import { Device } from 'App/Repository/Device';
 
 class BaseDeviceRepository implements DeviceRepository {
 
-    public async updateSession(id: any, session: string): Promise<void> {
-        let Database = Application.container.resolveBinding("Adonis/Lucid/Database");
-        await Database.query()
+
+    public async updateStatus(id: any, status: number): Promise<void> {
+        let database = Application.container.resolveBinding("Adonis/Lucid/Database");
+
+        await database.query()
             .from('devices')
             .where({ id: id }).update(
-                'session', session ? JSON.stringify(session, null) : null
+                'status', status
+            )
+    }
+
+    public async updateSession(id: any, session: any): Promise<void> {
+        let database = Application.container.resolveBinding("Adonis/Lucid/Database");
+
+        let sessionString = session ? JSON.stringify(session, null) : null
+        await database.query()
+            .from('devices')
+            .where({ id: id }).update(
+                'session', sessionString
             )
     }
 
     public async findAll(): Promise<Device[]> {
 
-        let Database = Application.container.resolveBinding("Adonis/Lucid/Database");
-        let rows = await Database.query()
+        let database = Application.container.resolveBinding("Adonis/Lucid/Database");
+        let rows = await database.query()
             .from('devices')
             .select('*');
 
@@ -35,9 +48,8 @@ class BaseDeviceRepository implements DeviceRepository {
     }
 
     public async findById(id: any): Promise<Device> {
-
-        let Database = Application.container.resolveBinding("Adonis/Lucid/Database");
-        let row = await Database.query()
+        let database = Application.container.resolveBinding("Adonis/Lucid/Database");
+        let row = await database.query()
             .from('devices')
             .select('*').where({ id: id }).first();
 

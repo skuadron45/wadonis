@@ -22,7 +22,8 @@
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
                 <th style="width:260px" class="text-center" scope="col">Api Key</th>
-                <th class="text-center" scope="col">Status</th>
+                <th class="text-center" scope="col">Session</th>
+                <th class="text-center" scope="col">Phone</th>
                 <th class="text-center" scope="col">Action</th>
               </tr>
             </thead>
@@ -35,7 +36,8 @@
                 <td class="text-center align-middle">
                   <div class="card text-center bg-light">{{device.token}}</div>
                 </td>
-                <td class="text-center align-middle">{{{device.status}}}</td>
+                <td class="text-center align-middle">{{{device.sessionHTML}}}</td>
+                <td class="text-center align-middle">{{{device.statusHTML}}}</td>
                 <td class="text-center align-middle">
 
                   @if(device.needQr)
