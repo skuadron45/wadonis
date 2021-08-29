@@ -25,10 +25,7 @@ class BaseWebSocketService implements WebSocketService {
     private initListener() {
 
         let whatsappServer = <WhatsappServerService>Application.container.resolveBinding(BIND_KEY);
-
         this.io.on("connection", async (socket) => {
-
-            // console.log(socket.request)
 
             if (socket.handshake.query.deviceId) {
                 socket.join("device-" + socket.handshake.query.deviceId);
@@ -69,7 +66,6 @@ class BaseWebSocketService implements WebSocketService {
                         response.qrText = client.getQrText();
                     }
                 }
-
                 callback(response);
             });
 

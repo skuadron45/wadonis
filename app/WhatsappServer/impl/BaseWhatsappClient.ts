@@ -1,7 +1,7 @@
 import Application from '@ioc:Adonis/Core/Application';
-import { DisconnectReason, MessageType, ReconnectMode, unixTimestampSeconds, WAChatUpdate, WAConnection, WAContact, whatsappID } from '@adiwajshing/baileys';
+import { DisconnectReason, MessageType, ReconnectMode, WAChatUpdate, WAConnection, WAContact } from '@adiwajshing/baileys';
 
-import { WebSocketService, BIND_KEY, RequestQrResponse } from 'App/Websocket/WebSocketService';
+// import { WebSocketService, BIND_KEY, RequestQrResponse } from 'App/Websocket/WebSocketService';
 
 import { WhatsappClient, WhatsappDevice } from 'App/WhatsappServer/WhatsappClient';
 
@@ -37,65 +37,60 @@ export default class BaseWhatsappClient implements WhatsappClient {
     }
 
     private init(): void {
-        let websocketService = <WebSocketService>Application.container.resolveBinding(BIND_KEY);
-
         let deviceRepository = <DeviceRepository.DeviceRepository>Application.container.resolveBinding(DeviceRepository.BIND_KEY);
-
         this.conn.on('qr', (qr: string) => {
-            console.log("QR Refreshed - device id: " + this.device.id);
             this.qrText = qr;
 
-            let response: RequestQrResponse = {
-                success: true,
-                device: this.device,
-                qrText: this.qrText
-            }
-            websocketService.emitTo("device-" + this.device.id, "qr-refreshed", response);
+            console.log("QR Refreshed - device id: " + this.device.id);
+            // let response: RequestQrResponse = {
+            //     success: true,
+            //     device: this.device,
+            //     qrText: this.qrText
+            // }
+            // websocketService.emitTo("device-" + this.device.id, "qr-refreshed", response);
         });
 
         this.conn.on('open', async () => {
-            console.log("Device id: " + this.device.id + " - " + "Open");
-
             this.qrText = null;
             const authInfo = this.conn.base64EncodedAuthInfo()
-            const authInfoString = JSON.stringify(authInfo, null, '\t');
-            // console.log('Auth JSON: ' + authInfoString);
-
+            // const authInfoString = JSON.stringify(authInfo, null, '\t');
             await deviceRepository.updateSession(this.device.id, authInfo);
-            websocketService.emitTo("device-" + this.device.id, "session-changed");
+
+            console.log("Device id: " + this.device.id + " - " + "Open");
+
+            // console.log('Auth JSON: ' + authInfoString);
+            // websocketService.emitTo("device-" + this.device.id, "session-changed");
         });
 
-        this.conn.on('contacts-received', async (u) => {
-            console.log("Device id: " + this.device.id + " - " + "Contacts Received");
-            // console.log(u.updatedContacts);
+        this.conn.on('contacts-received', async (update) => {
+            let contacts = update.updatedContacts;
+            this.contacts.push(...contacts);
 
-            let updates = u.updatedContacts;
-            this.contacts.push(...updates);
+            console.log("Device id: " + this.device.id + " - " + "Contacts Received");
+
+            // console.log(u.updatedContacts);
         });
 
         this.conn.on('CB:action,,battery', json => {
-            console.log("Device id: " + this.device.id + " - " + "baterai update");
-
             const batteryLevelStr = json[2][0][1].value
             const batterylevel = parseInt(batteryLevelStr)
-            console.log('Battery level: ' + batterylevel)
+
+            console.log("Device id: " + this.device.id + " - " + "baterai update: " + batterylevel);
         })
 
         this.conn.on('chat-update', (chat: WAChatUpdate) => {
-
             console.log("Device id: " + this.device.id + " - " + "Chat update");
-            // console.log(chat);
+
             if (chat.messages) {
-                let messages = chat.messages;
-                let all = chat.messages.all();
+                // let messages = chat.messages;
+                // let all = chat.messages.all();
                 // console.log(all)
                 // console.log(messages.first)
                 // console.log(messages.last)
                 // console.log(messages.length)
             }
 
-            websocketService.emitTo("device-" + this.device.id, "chat-update", whatsappID(this.conn.user.jid), chat);
-
+            // websocketService.emitTo("device-" + this.device.id, "chat-update", whatsappID(this.conn.user.jid), chat);
         });
 
         this.conn.on('close', async (err: { reason: DisconnectReason, isReconnecting: boolean }) => {
